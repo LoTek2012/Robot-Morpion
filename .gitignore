@@ -1,0 +1,14 @@
+# ENV
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+
+# IDE
+.vscode/
+
+# Custom
+start_server.ps1
