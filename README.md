@@ -1,36 +1,82 @@
 # Robot-Morpion
-Un robot LEGO Mindstorms NXT qui annalyse un plateau de morpion et joue le meilleur coup possible
 
-## Préparation
+A LEGO Mindstorms NXT robot that uses a camera to analyze a tic-tac-toe board, determine the best move, and play autonomously.
 
-### Materiel
-* Beaucoup de pieces LEGO
-* La LEGO Cam (C'est pour cette raison que le server est sous Windows XP et qu'il y a un serveur en fait 😉.)
-* 2 PCs (Pour le [Client](#client) et le [Serveur](#server))
+## Overview
 
-### Instructions de montage
-Les instruction de montages se trouvent dans le dossier ``lego/`` au format PDF avec le fichier pour Bricklink Studio.
+Robot-Morpion is split into two components running on separate computers:
 
-### Environement Python
-* Pour le [Client](#client), utiliser le ``requirement.txt``.
-* Pour le [Serveur](#), utiliser ``robot_morpion/server_robot_morpion/server_requirement.txt`` avec ``Python 2.4.4``. Respecter les versions des bibliotheques et de Python du Serveur **uniquement si le Serveur est sous Windows XP**. La version de ``opencv-python`` pour ``Python 3.4.4`` n'existe plus sur PyPi, vous la trouverai [ici](https://dashboard.stablebuild.com/pypi-deleted-packages/pkg/opencv-python/3.2.0.8)
+- **Server:** captures images from the camera and sends them to the client over a network socket.
+- **Client:** analyzes the images with OpenCV, determines the game state and best move, and controls the NXT motors using `nxt-python`.
 
-## Lancement du robot
-Il faut d'abord commencer par lancer le [Serveur](#server) car sinon le [Client](#client) renvera une erreur de connexion
+> [!IMPORTANT]
+> **Legacy environment:** The server was originally designed for Windows XP and Python 3.4.4. Running it on a modern operating system may require compatible versions of Python and its dependencies.
+
+## Hardware
+
+- Many LEGO building parts
+- A compatible camera (I recommend the *LEGO MovieMaker USB Camera*/*RCX Digital Colour Camera*)
+- Two computers: one for the server and one for the client
+- A network connection between the two computers
+
+## Project resources
+
+### Building instructions
+
+See [`docs/building-instructions.pdf`](docs/building-instructions.pdf).
+
+### Parts list
+
+See [`docs/part-list.csv`](docs/part-list.csv).
+
+### CAD model
+
+The LEGO model was created with BrickLink Studio. The project file is [`Robot-Morpion.io`](model/Robot-Morpion.io).
+
+## Software requirements
+
+The client and server have separate dependency lists:
+
+- **Client:** `client/requirements.txt`
+- **Server:** `server/requirements.txt`
+
+Use the dependency file appropriate to the component and Python environment you are setting up. The server's legacy Windows XP environment uses Python 3.4.4; if you use a newer system, check that the Python version and library versions are compatible.
+
+> [!NOTE]
+> The version of ``opencv-python`` for ``Python 3.4.4`` (the last version for XP) no longer exist on PyPi. You can download it [here](https://dashboard.stablebuild.com/pypi-deleted-packages/pkg/opencv-python/3.2.0.8)
+
+## Configuration
+
+Configure the environment files before starting either component:
+
+1. Copy `client/.env.exemple` to `client/.env`.
+2. Copy `server/.env.exemple` to `server/.env`.
+3. Set the values required by each component in its `.env` file.
+
+The exact variable names and required values are defined by the corresponding `.env.exemple` files.
+
+## Running the program
+
+Start the **server first**, then start the client. The client needs the server to be running in order to connect and receive images.
 
 ### Server
-Les fichiers du Serveur se situe dans ``robot_morpion/server_robot_morpion/``.
-Le dossier du server doit être placé sur un ordinateur different du Client et connecté au même reseau local.
 
-Le server a été concu et optimiser pour fonctionner sur Windows XP avec Python 3.4.4 mais il peut fonctionner sur un environement plus recent avec les bonne versions de Python et des bibliotheques.
+The server is located in `server/` and should run on a computer different from the client computer.
 
-Sa fonction est simplement de prendre des photos avec la camera et de les envoyer au [Client](#client) via ``socket``.
+Its responsibilities are to:
+
+1. Capture images using the connected camera.
+2. Send the images to the client through a network socket.
 
 ### Client
-Le Client s'occupe de :
-1. Demander et recevoire les images de la camera du [Serveur](#server) via ``socket``
-2. Annalizer les images et l'avancement du jeu avec la bibliotheque ``opencv-python``
-3. Jouer le meilleur coup possible en utilisant les moteurs de la brique NXT via ``nxt-python``
+
+The client is located in `client/`. Its responsibilities are to:
+
+1. Request and receive camera images from the server through a network socket.
+2. Analyze the images with OpenCV to determine the current board state.
+3. Determine the best move.
+4. Control the NXT motors using `nxt-python` to execute the move.
 
 ## License
-**MIT License**
+
+This project is released under the MIT License. See [`LICENSE`](LICENSE) for more informations.
