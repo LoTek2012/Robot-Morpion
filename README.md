@@ -27,7 +27,7 @@ See [`docs/building-instructions.pdf`](docs/building-instructions.pdf).
 
 ### Parts list
 
-See [`docs/part-list.csv`](docs/part-list.csv).
+See [`docs/parts-list.csv`](docs/parts-list.csv).
 
 ### CAD model
 
