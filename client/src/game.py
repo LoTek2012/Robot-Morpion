@@ -1,3 +1,5 @@
+# client/src/game.py
+
 from config import *
 from grid import Grid
 

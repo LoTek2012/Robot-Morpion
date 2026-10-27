@@ -1,3 +1,5 @@
+# client/src/camera_preview.py
+
 import cv2
 import tkinter as tk
 import PIL.Image

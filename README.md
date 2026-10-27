@@ -10,14 +10,14 @@ Robot-Morpion is split into two components running on separate computers:
 - **Client:** analyzes the images with OpenCV, determines the game state and best move, and controls the NXT motors using `nxt-python`.
 
 > [!IMPORTANT]
-> **Legacy environment:** The server was originally designed for Windows XP and Python 3.4.4. Running it on a modern operating system may require compatible versions of Python and its dependencies.
+> **Legacy environment:** The server was originally designed for Windows XP and Python 3.4.4. Running it on a modern operating system may require compatible versions of Python and its dependencies (You can use the `client/requiremenents.txt`).
 
 ## Hardware
 
 - Many LEGO building parts
 - A compatible camera (I recommend the *LEGO MovieMaker USB Camera*/*RCX Digital Colour Camera*)
-- Two computers: one for the server and one for the client
-- A network connection between the two computers
+- Two computers: one for the server and one for the client (or just one for the two)
+- A network connection between the two computers (not needed if you use a single computer)
 
 ## Project resources
 

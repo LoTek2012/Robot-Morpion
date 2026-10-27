@@ -1,3 +1,5 @@
+# client/src/client.py
+
 import socket
 import numpy
 import cv2

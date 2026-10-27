@@ -1,10 +1,16 @@
-from cam_server import CamServer
+# serveur/main.py
+
 import traceback
 import sys
+import os
+from dotenv import load_dotenv
+from cam_server import CamServer
 
-HOST = "0.0.0.0"
-PORT = 2012
-CAM_INDEX = 0
+load_dotenv()
+
+HOST = os.getenv('HOST', 'localhost')
+PORT = int(os.getenv('PORT', 2012))
+CAM_INDEX = int(os.getenv('CAM_INDEX', 0))
 
 try:
     cam_server = CamServer(HOST, PORT, CAM_INDEX)

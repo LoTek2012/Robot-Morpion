@@ -1,3 +1,5 @@
+# client/src/main.py
+
 from client import Client
 from camera_preview import CameraPreview
 from config import *

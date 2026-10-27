@@ -1,3 +1,5 @@
+# client/src/grid.py
+
 import random
 from config import *
 

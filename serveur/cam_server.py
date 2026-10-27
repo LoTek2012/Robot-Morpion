@@ -1,3 +1,5 @@
+# serveur/cam_server.py
+
 import socket
 import cv2
 
